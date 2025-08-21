@@ -1,28 +1,33 @@
 // Se arma la pagina principal 
 import React,{useState, useEffect} from "react";
 import styled from "styled-components";
+
+// Invoca una función del swapi 
 import { fetchEntities } from "../services/swapi";
 import Card from '../components/Card';
 import LoadingSpinner from "../components/LoadingSpinner";
 import { colors } from "../styles/variables";
 
-
+// Define el componente
 const HomePageContainer = styled.div`
     padding: 20px;
     text-align: center;
 `;
 
+// Define el componente Title
 const SectionTitle = styled.h2`
     color: ${colors.primary};
     font-size: 2.5em;
     margin-bottom: 30px;
 `;
 
+// Define el componente container del button
 const ButtonContainer = styled.div`
     margin-bottom: 40px;
 `;
-
-const SelectionButton = styled.button`
+// Define el componente de button para seleccionar
+// background-color  Se pasa como un props si esta activo toma el color primario sino secondario
+const SelectionButton = styled.button`   
     background-color:${props => props.$active ? colors.primary : colors.secondary};
     color: ${props => props.$active ? colors.tertiary : colors.text};
     border: 2px solid ${colors.primary};
@@ -39,13 +44,16 @@ const SelectionButton = styled.button`
     }
 `;
 
+// Define componente Distribuccion de las cars
+// Para acomodar el texto,  selecciona format seleccion  se da aceptar al mensaje
 const CarsdGrid = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 `;
-
+// Variables de estado lo que vamos a Tuipo que va a seleccionar, 
+//  la entidad se traslada como una lista
 const HomePage = ()=>{
     const [selectedType, setSelectedType] = useState(null);
     const [entities, setEntities] = useState([]);
@@ -53,6 +61,7 @@ const HomePage = ()=>{
     const [error,setError] = useState(null);
 
     useEffect(()=>{
+        // Si no selecionamos ninguno salgo
         if (!selectedType) return;
 
         const loadEntities = async()=>{
@@ -71,29 +80,34 @@ const HomePage = ()=>{
         loadEntities();
     },[selectedType]);
 
-    // Esencia para hacer todo lo que quiera 
+    // Funcion para obtener el detalle de la card 
     const getCardDetails = (entity, type)=>{
-
+        //  Obtengo la información para personas, en forma de un diccionario
         if (type === 'people'){
             return {
                 'Genero': entity.gender,
                 'Estatura': entity.height,
                 'Peso': entity.mass,
             };
-		
-        } else if (type === 'planets'){ // Carga por tipo
+
+		//  Obtengo la información para planetas, en forma de un diccionario
+        } else if (type === 'planets'){ 
             return {
                 'Clima': entity.climate,
                 'Terreno': entity.terrain,
                 'Poblacion': entity.population,
             };
-        } else if ( type === 'species'){ // Carga por tipo de Peliculas
+
+        //  Obtengo la información para Especie, en forma de un diccionario    
+        } else if ( type === 'species'){ 
             return {
                 'Nombre': entity.name,
                 'Clasificación' : entity.classification,
                 'Idioma': entity.language,
             };
-        }else if ( type === 'vehicles'){ // Carga por tipo Vehiculos
+
+        //  Obtengo la información para Vehiculos, en forma de un diccionario       
+        }else if ( type === 'vehicles'){ 
             return {
                 'Nombre': entity.name,
                 'Modelo' : entity.model,
@@ -102,6 +116,7 @@ const HomePage = ()=>{
         }
         return {};
     };
+    // Se arma 
     return (
         <HomePageContainer>
             <SectionTitle>Elige tu camino en la Galaxia</SectionTitle>
@@ -111,17 +126,17 @@ const HomePage = ()=>{
                         onClick={()=> setSelectedType('people')}>
                             Personajes
                     </SelectionButton>
-                    <SelectionButton // Agrega el boton 
+                    <SelectionButton  
                         $active={selectedType === 'planets'}
                         onClick={()=> setSelectedType('planets')}>
                             Planetas
                     </SelectionButton>
-                     <SelectionButton // Agrega el boton 
+                     <SelectionButton 
                         $active={selectedType === 'species'}
                         onClick={()=> setSelectedType('species')}>
                             Especies
                     </SelectionButton>
-                     <SelectionButton // Agrega el boton 
+                     <SelectionButton 
                         $active={selectedType === 'vehicles'}
                         onClick={()=>setSelectedType('vehicles')}>
                             Vehiculos

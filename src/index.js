@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 //import './index.css';
 														  
-
+// BrowseRouter ve a app como un componente individual no requiere descompetizar todo
 import { Browser, BrowserRouter } from 'react-router-dom';
 import App from './App';
 
@@ -10,7 +10,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  <React.StrictMode>
- {/* <BrowserRouter>    // Envolver el APP */}
+ {/* <BrowserRouter>    // Envolver el APP  dentro BrowserRouter*/}
     <App />
     {/* </BrowserRouter> */}
  </React.StrictMode>

@@ -13,7 +13,7 @@
 
 // API: La información la devuelve en String pero es un diccionario.
 // axios Es una libreria que debe instarlar con: npm install axios Permite hacer funciones asincronicas más sencillas.
-// styled-components Es una libreria permite inserta estilos en JS.
+// 'styled-components' Es una libreria permite inserta estilos en JS.
 
 import axios from "axios";
 
