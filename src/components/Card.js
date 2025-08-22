@@ -54,7 +54,7 @@ const Card = ({ name, type, details, url })=>{
     const detailUrl = `/${type}/${encodeURIComponent(btoa(url))}`;
     return (
         // Se llama los componentes definidos 
-        <CardContainer>
+        <CardContainer to={detailUrl}>
             {/* // Va entre llaves x es un prop */}
             <CardTitle>{name}</CardTitle>
             {/* Es una lista, porque son varios, Object  provee funcionalidad para objeto js
